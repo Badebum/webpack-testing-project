@@ -11,6 +11,7 @@ module.exports = {
     mode: mode,
     entry: {
         scripts: './src/index.js',
+       
     },
     output: {
         filename: '[name].[contenthash].js',
@@ -37,6 +38,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         })],
+    
+    stats: {
+         children: true
+    },
+    
     module: {
         rules: [
             {
