@@ -1,37 +1,21 @@
-const colors = [
-  '#FFFFFF',
-  '#2196F3',
-  '#4CAF50',
-  '#FF9800',
-  '#009688',
-  '#795548',
-];
+import { CountdownTimer } from './js/timer.js';
 
-const randomIntegerFromInterval = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+const refs = {
+  days: document.querySelector('[data-value="days"]'),
+  hours: document.querySelector('[data-value="hours"]'),
+  mins: document.querySelector('[data-value="mins"]'),
+  secs: document.querySelector('[data-value="secs"]'),
 };
 
-const body = document.querySelector('body');
-const startBtnRef = document.querySelector('[ data-action="start"]');
-const stoptBtnRef = document.querySelector('[ data-action="stop"]');
+new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date(2022, 1, 15, 15, 15),
+  onTick: updateTimer,
+});
 
-let timeId = null;
-
-const onRandomBgColor = () => {
-  timeId = window.setInterval(
-    () =>
-      (body.style.backgroundColor =
-        colors[randomIntegerFromInterval(0, colors.length - 1)]),
-    1000,
-  );
-  startBtnRef.setAttribute('disabled', 'disabled');
-};
-
-startBtnRef.addEventListener('click', onRandomBgColor);
-
-const onStopChangeBgColor = () => {
-  window.clearInterval(timeId);
-  startBtnRef.removeAttribute('disabled', 'disabled');
-};
-
-stoptBtnRef.addEventListener('click', onStopChangeBgColor);
+function updateTimer({ days, hours, mins, secs }) {
+  refs.days.textContent = days;
+  refs.hours.textContent = hours;
+  refs.mins.textContent = mins;
+  refs.secs.textContent = secs;
+}
