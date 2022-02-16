@@ -16,7 +16,7 @@ function onChange(e) {
 }
 
 function cardCountriesRender(info) {
-  const markup = countries(info);
-
-  refs.card.insertAdjacentHTML = markup;
+  const markup = countries(info.map(c => c));
+  console.log(info);
+  refs.card.insertAdjacentHTML('afterbegin', markup);
 }
