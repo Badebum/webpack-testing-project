@@ -20,3 +20,10 @@ function cardCountriesRender(info) {
   console.log(info);
   refs.card.insertAdjacentHTML('afterbegin', markup);
 }
+
+// const arr = ['Hello world', 'This is a great solution', 'How are you'];
+
+// const res = {};
+
+
+
