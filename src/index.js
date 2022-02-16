@@ -1,21 +1,22 @@
-import { CountdownTimer } from './js/timer.js';
+import fetchContries from './js/fetchData.js';
+import countries from './templates/countries.hbs';
 
 const refs = {
-  days: document.querySelector('[data-value="days"]'),
-  hours: document.querySelector('[data-value="hours"]'),
-  mins: document.querySelector('[data-value="mins"]'),
-  secs: document.querySelector('[data-value="secs"]'),
+  areaInput: document.querySelector('#areaInput'),
+  card: document.querySelector('.card-container'),
 };
 
-new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date(2022, 1, 15, 15, 15),
-  onTick: updateTimer,
-});
+refs.areaInput.addEventListener('change', onChange);
 
-function updateTimer({ days, hours, mins, secs }) {
-  refs.days.textContent = days;
-  refs.hours.textContent = hours;
-  refs.mins.textContent = mins;
-  refs.secs.textContent = secs;
+function onChange(e) {
+  e.preventDefault();
+  const country = refs.areaInput.value;
+
+  fetchContries(country).then(cardCountriesRender);
+}
+
+function cardCountriesRender(info) {
+  const markup = countries(info);
+
+  refs.card.insertAdjacentHTML = markup;
 }
